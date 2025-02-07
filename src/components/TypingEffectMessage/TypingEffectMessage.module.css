@@ -1,0 +1,15 @@
+.typingTextWrap {
+  font-family: 'IBM Plex Mono', serif;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 20vh;
+}
+
+.h1 {
+  text-transform: uppercase;
+}
+
+.typingEffect span {
+  font-size: 44px; /* Збільшуємо розмір курсора */
+  color: rgb(255, 255, 255);
+}

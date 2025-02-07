@@ -1,0 +1,64 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.3s ease, transform 0.5s ease;
+  overflow: hidden;
+  background-color: #fff;
+  max-width: 100%;
+  outline: none;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px rgb(255, 255, 255), 0 12px 24px rgba(255, 255, 255, 0);
+  transform: scale(1.05);
+
+  cursor: zoom-in;
+}
+
+.card:active {
+  transform: translateY(2px); /* Зображення ніби "натискається" вниз */
+}
+
+.imageWrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-bottom: 1px solid gray;
+}
+
+.imageDescription {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  font-size: 14px;
+  color: #333;
+  padding: 8px;
+  background-color: #f9f9f9;
+}
+
+.descriptionText {
+  overflow: hidden;
+  white-space: nowrap; /* Забороняє перенос тексту на новий рядок */
+  text-overflow: ellipsis; /* Додає три крапки (...) */
+  width: 270px;
+  font-weight: bold;
+  color: #000;
+}
+
+.likesText {
+  font-size: 16px;
+  text-decoration: underline;
+  font-weight: 600;
+  color: #666;
+}
