@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 import toast from 'react-hot-toast';
 
-const ErrorMessage = () => {
-  const hasToastShown = useRef(false);
+const ErrorMessage: React.FC = () => {
+  const hasToastShown = useRef<boolean>(false);
 
   useEffect(() => {
     if (!hasToastShown.current) {

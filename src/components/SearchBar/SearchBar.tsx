@@ -4,9 +4,10 @@ import toast from 'react-hot-toast';
 
 interface SearchBarProps {
   onSubmit: (newQuery: string) => void;
+  totalResults: number;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }): JSX.Element => {
+const SearchBar = ({ onSubmit, totalResults }: SearchBarProps): JSX.Element => {
   const [query, setQuery] = useState<string>('');
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -51,6 +52,11 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }): JSX.Element => {
           <span>Search</span>
         </button>
       </form>
+      {totalResults > 0 && (
+        <p className={styles.resultsText}>
+          Total results found: {totalResults}
+        </p>
+      )}
     </header>
   );
 };

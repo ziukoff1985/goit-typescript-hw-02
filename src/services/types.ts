@@ -14,4 +14,5 @@ export interface Image {
 export interface FetchImagesResponse {
   results: Image[];
   total_pages: number;
+  total: number;
 }

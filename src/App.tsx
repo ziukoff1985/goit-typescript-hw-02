@@ -12,24 +12,6 @@ import ErrorNotification from './components/NoResultsNotification/NoResultsNotif
 import TypingEffectMessage from './components/TypingEffectMessage/TypingEffectMessage';
 import { Image, FetchImagesResponse } from './services/types';
 
-// interface URL {
-//   small: string;
-//   regular: string;
-// }
-
-// interface Image {
-//   id: string;
-//   urls: URL;
-//   alt_description?: string;
-//   likes: number;
-//   description?: string;
-// }
-
-// interface FetchImagesResponse {
-//   results: Image[];
-//   total_pages: number;
-// }
-
 function App() {
   const [query, setQuery] = useState<string>('');
   const [images, setImages] = useState<Image[]>([]);
@@ -41,9 +23,10 @@ function App() {
   const [isNoResults, setIsNoResults] = useState<boolean>(false);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [typingMessage, setTypingMessage] = useState<boolean>(true);
+  const [totalResults, setTotalResults] = useState<number>(0);
 
   useEffect(() => {
-    const fetchImagesData = async () => {
+    const fetchImagesData = async (): Promise<void> => {
       setIsLoading(true);
       setIsError(false);
       setIsNoResults(false);
@@ -51,10 +34,8 @@ function App() {
       setTypingMessage(false);
 
       try {
-        const { results, total_pages }: FetchImagesResponse = await fetchImages(
-          query,
-          page
-        );
+        const { results, total_pages, total }: FetchImagesResponse =
+          await fetchImages(query, page);
 
         if (results.length === 0) {
           setIsNoResults(true);
@@ -63,13 +44,14 @@ function App() {
 
         setImages(prevImages => [...prevImages, ...results]);
         setTotalPages(total_pages);
+        setTotalResults(total);
 
         if (page === total_pages) {
           toast.error('Oops, this is the last page 🤷‍♂️');
         }
-      } catch (error) {
+      } catch (error: unknown) {
         setIsError(true);
-        console.log(error);
+        console.error('Error fetching images:', error);
       } finally {
         setIsLoading(false);
       }
@@ -79,26 +61,28 @@ function App() {
     }
   }, [query, page]);
 
-  const handleSearchSubmit = (newQuery: string) => {
+  const handleSearchSubmit = (newQuery: string): void => {
+    if (newQuery.trim().toLowerCase() === query.trim().toLowerCase()) return;
     setQuery(newQuery);
     setImages([]);
     setPage(1);
+    setTotalResults(0);
   };
 
-  const handleLoadMore = () => {
+  const handleLoadMore = (): void => {
     if (page < totalPages) {
       setPage(prevPage => prevPage + 1);
     }
   };
 
-  const handleImageClick = (imageUrl: string) => {
+  const handleImageClick = (imageUrl: string): void => {
     setModalImage(imageUrl);
     setIsModalOpen(true);
   };
 
   return (
     <>
-      <SearchBar onSubmit={handleSearchSubmit} />
+      <SearchBar onSubmit={handleSearchSubmit} totalResults={totalResults} />
       <Toaster position="top-right" reverseOrder={false} />
       {typingMessage && <TypingEffectMessage />}
       {images.length > 0 && (

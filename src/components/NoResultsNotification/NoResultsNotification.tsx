@@ -8,7 +8,7 @@ interface ErrorNotificationProps {
 const ErrorNotification = ({
   message,
 }: ErrorNotificationProps): JSX.Element | null => {
-  const hasToastShown = useRef(false);
+  const hasToastShown = useRef<boolean>(false);
 
   useEffect(() => {
     if (!hasToastShown.current) {

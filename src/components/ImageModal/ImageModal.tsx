@@ -2,7 +2,6 @@ import Modal from 'react-modal';
 import styles from './ImageModal.module.css';
 
 Modal.setAppElement('#root');
-
 interface ImageModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
@@ -28,4 +27,4 @@ const ImageModal = ({
   );
 };
 
-export default ImageModal; // Експорт компонента
+export default ImageModal;

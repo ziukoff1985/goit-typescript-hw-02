@@ -1,11 +1,6 @@
 import styles from './ImageCard.module.css';
 import { URL } from '../../services/types';
 
-// interface URL {
-//   small: string;
-//   regular: string;
-// }
-
 interface ImageCardProps {
   urls: URL;
   alt_description?: string;
