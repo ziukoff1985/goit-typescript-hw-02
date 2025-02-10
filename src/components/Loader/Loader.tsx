@@ -1,6 +1,8 @@
+// Імпорт компонента з бібліотеки react-loader-spinner
 import { DNA } from 'react-loader-spinner';
 import styles from './Loader.module.css';
 
+// Компонент Loader
 const Loader: React.FC = () => {
   return (
     <div className={styles.loaderWrap}>
